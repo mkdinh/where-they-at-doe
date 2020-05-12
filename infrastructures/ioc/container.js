@@ -1,4 +1,4 @@
-class Container {
+module.exports = class Container {
     constructor() {
         this.modules = {};
     }
@@ -11,8 +11,12 @@ class Container {
     }
 
     get(name) {
-        const { Definition, dependencies } = this.module[name];
+        const { Definition, dependencies } = this.modules[name];
         const modules = dependencies.map(name => this.get(name));
         return new Definition(...modules);
+    }
+
+    initialize() {
+        this.modules = {};
     }
 }

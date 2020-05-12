@@ -1,1 +1,1 @@
-export { default } from './file-context';
+module.exports = require('./file-context');

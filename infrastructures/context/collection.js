@@ -1,43 +1,21 @@
-export class Collection {
-    constructor(readMethod, writeMethod) {
+module.exports = class Collection {
+    constructor(ord, readMethod, writeMethod) {
+        this.ord = ord;
         this._read = readMethod;
         this._write = writeMethod;
     }
 
-    async read(predicate) {
-        const data = await this._read();
-        
+    async where(predicate) {
+        const data = await this._read(this.ord);
         return predicate
             ? data.filter(predicate)
             : data;
     }
 
-    async create(entity) {
-        const data = await this._read();
-        const newId = data.reduce((a, b) => {
-            return Math.max(a.id, b.id)
-        });
-        entity.id = newId;
-        data.push(entity);
-        return this._write(data);
-    }
-
-    async update(updateEntity) {
-        const data = await this._read();
-        const entityIndex = data.findIndex(entity => entity.id == updateEntity.id);
+    async first(predicate) {
+        if (!predicate) throw new Error('first query need to have a predicate.');
         
-        if (entityIndex == -1) {
-            throw new Error(`Invalid entity: ${entity.id}`);
-        }
-
-        data[entityIndex] = updateEntity;
-        await this._write(data);
-    }
-
-    async delete(id) {
-        const data = await this._read();
-        const entityIndex = data.findIndex(entity => entity.id == id);
-        data.splice(entityIndex, 1);
-        await this._write(data);
+        const data = await this._read(this.ord);
+        return data.find(predicate)
     }
 }

@@ -1,1 +1,3 @@
-export { default as UserService } from './user.service';
+module.exports = {
+    UserService: require('./user.service')
+}

@@ -1,4 +1,4 @@
-export default class UserService {
+module.exports = class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
@@ -9,13 +9,5 @@ export default class UserService {
 
     getUserById(id) {
         return this.userRepository.single(id);
-    }
-
-    updateUser(user) {
-        return this.userRepository.update(user);
-    }
-
-    removeUser(user) {
-        return this.userRepository.remove(user.id);
     }
 }

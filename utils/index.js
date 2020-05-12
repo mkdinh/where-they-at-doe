@@ -1,1 +1,3 @@
-export { default as FileUtils } from './file';
+module.exports = {
+    FileUtils: require('./file')
+}

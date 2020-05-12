@@ -1,29 +1,18 @@
-import path from 'path';
-import Collection from './collection';
-import { FileUtils } from '../../utils';
+const path = require('path')
+const Collection = require('./collection');
+const { FileUtils } = require('../../utils');
 
-export default class DiskContext {
+module.exports = class FileContext {
     constructor() {
         this.user = new Collection(this.generateOrd('user.collection.json'), this.read, this.write)
     }
     
-    async read() {
+    async read(ord) {
         try {
-            return FileUtils.read(this.ord); 
+            return FileUtils.read(ord); 
         }
         catch (e) {
             console.log(e)
-        }
-    }
-
-    async write(data) {
-        try {
-            await FileUtils.writeToFile(this.ord, data);
-            return true;
-        }
-        catch (e) {
-            console.log(e)
-            return false;
         }
     }
 

@@ -1,1 +1,3 @@
-export { default as MetaData } from './MetaData';
+module.exports = {
+    MetaData: require('./MetaData')
+}

@@ -1,4 +1,4 @@
-export default class MetaData {
+module.exports = class MetaData {
     constructor (address, ipAddress, bio) {
         this.address = address;
         this.ipAddress = ipAddress;

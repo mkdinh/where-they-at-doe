@@ -1,12 +1,9 @@
-import * as fs from 'fs';
-import { promisify } from 'util';
-
-export default class FileUtils {
-    static read(ord) {
-        return promisify(fs.read)(ord);
-    }
-
-    static write(ord) {
-        return promisify(fs.writeFile)(ord);
+const fs = require('fs')
+const { promisify } = require('util');
+module.exports = class FileUtils {
+    static async read(ord) {
+        const read = promisify(fs.readFile);
+        const data = await read(ord);
+        return JSON.parse(data);
     }
 }

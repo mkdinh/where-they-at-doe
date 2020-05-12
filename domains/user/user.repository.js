@@ -1,4 +1,4 @@
-import { User } from './user-repository';
+import { User } from './user.repository';
 import { MetaData } from '../value-objects';
 
 export default class UserRepository {

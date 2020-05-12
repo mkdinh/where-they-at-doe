@@ -1,23 +1,24 @@
+const { User } = require('../../domains');
+const { MetaData } = require('../../domains/value-objects');
 
-const { MetaData } = require('../value-objects');
-
-module.exports = class User {
-    constructor(id, firstName, lastName, email, gender, appVersion, metaData) {
-        this.id = id;
-        this.firstName = firstName;
-        this.last_name = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.appVersion = appVersion;
-        this.metaData = metaData;
-        this.profilePhotoUrl = null;
+module.exports = class UserRepository {
+    constructor(context) { 
+        this.context = context;
     }
 
-    setProfilePhotoUrl(url) {
-        this.profilePhotoUrl = url;
+    async get() {
+        const models = await this.context.user.where();
+        const domains = models.map(this.convertToDomain);
+        return domains;
     }
 
-    static convertToDomain(model) {
+    async single(id) {
+        const model = await this.context.user.first(entity => entity.id === id);
+        const domain = this.convertToDomain(model);
+        return domain;
+    }
+
+    convertToDomain(model) {
         const { id, first_name, last_name, email, gender, app_version, profile_photo_url, meta } = model;
 
         const metaData = meta.map(d => new MetaData(d.address, d.ip_address, d.bio));
@@ -28,7 +29,7 @@ module.exports = class User {
         return user;
     }
 
-    static convertToModel(user) {
+    convertToModel(user) {
         const { id, firstName, lastName, email, gender, appVersion, profilePhotoUrl, meta } = user;
         const metaModels = meta.map(m => {
             const { address, ipAddress, bio } = m;

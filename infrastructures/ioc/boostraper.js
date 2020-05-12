@@ -1,6 +1,6 @@
 const { UserController } = require('../../controllers');
-const { UserService } = require('../../services/');
-const { UserRepository } = require('../../domains/user');
+const { UserService } = require('../../services');
+const { UserRepository } = require('../repository');
 const Context = require('../context');
 
 module.exports = function(container) {

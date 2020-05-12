@@ -9,7 +9,7 @@ module.exports = class UserController {
             return res.json(users);
         } catch (err) {
             console.log(err);
-            res.status(400).json({ err });
+            res.status(400).json({ err: err.toString() });
         }
     }
 
@@ -20,7 +20,7 @@ module.exports = class UserController {
             return res.json(user)
         } catch (err) {
             console.log(err);
-            res.status(400).json({ err });
+            res.status(400).json({ err: err.toString() });
         }
     }
 }

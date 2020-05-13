@@ -17,3 +17,17 @@ Backend for an NSA-friendly application to track people through their ip address
 ## Test
 
 `npm test`
+
+## Futures on roadmap
+
+- Integration to a database service
+- Create new user
+- Update current user
+- Delete current user
+- Authentication system
+- Role based access control
+
+## Additional dev works
+
+- Add api tests
+- Increase unit test coverage

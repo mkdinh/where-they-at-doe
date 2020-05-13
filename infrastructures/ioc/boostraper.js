@@ -11,7 +11,7 @@ module.exports = function (container) {
   container.register("console", console, [], true);
   container.register("logger", Logger, ["console"]);
   container.register("ipService", IPService, ["axios", "logger"]);
-  container.register("context", Context, []);
+  container.register("context", Context, ["logger"]);
   container.register("userRepository", UserRepository, ["context"]);
   container.register("userService", UserService, [
     "userRepository",

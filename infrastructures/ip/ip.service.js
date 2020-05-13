@@ -9,7 +9,6 @@ module.exports = class IPAddressService {
   }
 
   async getLocationFromIP(ip) {
-    console.log(ip);
     var form = new FormData();
     form.append("ip", ip);
     try {
@@ -38,7 +37,6 @@ module.exports = class IPAddressService {
         lng
       );
     } catch (err) {
-      console.log(err);
       this.logger.error(err);
     }
   }

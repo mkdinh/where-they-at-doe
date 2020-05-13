@@ -21,5 +21,7 @@ app.use(routes);
 // Start server
 //--------------------------------------------------------
 app.listen(keys.PORT, () => {
-  logger.log("listening to port: ", keys.PORT);
+  logger.log(`listening to port: ${keys.PORT}`);
 });
+
+module.exports = app;

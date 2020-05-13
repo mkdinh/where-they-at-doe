@@ -31,3 +31,4 @@ Backend for an NSA-friendly application to track people through their ip address
 
 - Add api tests
 - Increase unit test coverage
+- Add a CI/CI pipeline

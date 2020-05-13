@@ -1,22 +1,26 @@
 module.exports = class Container {
-    constructor() {
-        this.modules = {};
-    }
+  constructor() {
+    this.modules = {};
+  }
 
-    register(name, Definition, dependencies) {
-        this.modules[name] = {
-            Definition,
-            dependencies: dependencies || []
-        }
-    }
+  register(name, Definition, dependencies, singleton) {
+    this.modules[name] = {
+      Definition,
+      dependencies: dependencies || [],
+      singleton,
+    };
+  }
 
-    get(name) {
-        const { Definition, dependencies } = this.modules[name];
-        const modules = dependencies.map(name => this.get(name));
-        return new Definition(...modules);
+  get(name) {
+    const { Definition, dependencies, singleton } = this.modules[name];
+    if (singleton) {
+      return Definition;
     }
+    const modules = dependencies.map((name) => this.get(name));
+    return new Definition(...modules);
+  }
 
-    initialize() {
-        this.modules = {};
-    }
-}
+  initialize() {
+    this.modules = {};
+  }
+};

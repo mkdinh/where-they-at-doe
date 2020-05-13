@@ -1,13 +1,22 @@
 module.exports = class UserService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
+  constructor(userRepository, ipService) {
+    this.userRepository = userRepository;
+    this.ipService = ipService;
+  }
+
+  getUsers() {
+    return this.userRepository.get();
+  }
+
+  async getUserById(id) {
+    const user = await this.userRepository.single(id);
+    const meta = user.meta;
+
+    if (meta) {
+      const location = await this.ipService.getLocationFromIP(meta.ipAddress);
+      user.setLocation(location);
     }
 
-    getUsers() {
-        return this.userRepository.get();
-    }
-
-    getUserById(id) {
-        return this.userRepository.single(id);
-    }
-}
+    return user;
+  }
+};

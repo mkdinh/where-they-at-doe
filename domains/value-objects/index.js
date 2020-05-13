@@ -1,3 +1,4 @@
 module.exports = {
-    MetaData: require('./MetaData')
-}
+  MetaData: require("./MetaData"),
+  Location: require("./Location"),
+};

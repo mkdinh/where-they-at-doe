@@ -1,17 +1,25 @@
-
 module.exports = class User {
-    constructor(id, firstName, lastName, email, gender, appVersion, metaData) {
-        this.id = id;
-        this.firstName = firstName;
-        this.last_name = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.appVersion = appVersion;
-        this.metaData = metaData;
-        this.profilePhotoUrl = null;
-    }
+  constructor(id, firstName, lastName, email, gender, appVersion) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.gender = gender;
+    this.appVersion = appVersion;
+    this.profilePhotoUrl = null;
+    this.location = null;
+    this.fullName = `${firstName} ${lastName}`;
+  }
 
-    setProfilePhotoUrl(url) {
-        this.profilePhotoUrl = url;
-    }
-}
+  setMeta(meta) {
+    this.meta = meta;
+  }
+
+  setProfilePhotoUrl(url) {
+    this.profilePhotoUrl = url;
+  }
+
+  setLocation(location) {
+    this.location = location;
+  }
+};

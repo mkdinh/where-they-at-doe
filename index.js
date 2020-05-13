@@ -1,11 +1,11 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
 const keys = require("./keys");
 const createRoutes = require("./routes");
+const logger = require("./infrastructures/ioc").get("logger");
 
 // Configure Express server
 //--------------------------------------------------------
@@ -21,5 +21,5 @@ app.use(routes);
 // Start server
 //--------------------------------------------------------
 app.listen(keys.PORT, () => {
-  console.log("listening to port: ", keys.PORT);
+  logger.log("listening to port: ", keys.PORT);
 });

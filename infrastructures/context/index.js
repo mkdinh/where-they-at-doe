@@ -1,1 +1,3 @@
-module.exports = require('./file-context');
+module.exports = {
+  Context: require("./file-context"),
+};

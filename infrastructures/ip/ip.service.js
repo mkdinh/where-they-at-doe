@@ -25,7 +25,6 @@ module.exports = class IPAddressService {
         lat,
         lng,
       } = response.data;
-
       return new Location(
         city,
         company,

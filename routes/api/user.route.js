@@ -5,6 +5,7 @@ const userController = container.get('userController');
 const router = Router();
 router.get('/', userController.getUsers.bind(userController))
 router.get('/:id', userController.getUser.bind(userController));
+router.put('/:id', userController.updateUser.bind(userController));
 
 module.exports = router;
 

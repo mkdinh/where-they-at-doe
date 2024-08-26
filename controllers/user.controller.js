@@ -26,4 +26,18 @@ module.exports = class UserController {
       res.status(400).json({ err: message });
     }
   }
+
+  async updateUser(req, res) {
+    try {
+      const userId = parseInt(req.params.id);
+      const body = req.body;
+      const user = await this.userService.updateUser(userId, body);
+      console.log(user)
+      return res.json(user);
+    } catch (err) {
+      const message = err.toString();
+      this.logger.error(message);
+      res.status(400).json({ err: message });
+    }
+  }
 };

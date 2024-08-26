@@ -20,6 +20,14 @@ module.exports = class FileContext {
     }
   }
 
+  async write(ord, data) {
+    try {
+      return FileUtils.write(ord, data);
+    } catch (err) {
+      this.logger.error(err);
+    }
+  }
+
   generateOrd(fileName) {
     return path.join(__dirname, "..", "..", "data", fileName);
   }

@@ -17,6 +17,26 @@ module.exports = class UserService {
       user.setLocation(location);
     }
 
+    console.log(user)
+
     return user;
+  }
+
+  async updateUser(id, params) {
+    // check if user exists
+    const user = await this.userRepository.single(id);
+    if (!user) throw Error('user does not exist.')
+    
+    user.firstName = params.firstName || user.firstName;
+
+    if (params.lastName) {
+      user.lastName = params.lastName;
+    }
+
+    if (params.email) {
+      user.email = params.email;
+    }
+
+    return this.userRepository.update(user)
   }
 };

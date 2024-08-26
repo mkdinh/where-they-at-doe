@@ -18,6 +18,28 @@ module.exports = class UserRepository {
     return domain;
   }
 
+  async update(user) {
+    const model = await this.context.user.update((entity) => entity.id === user.id, this.convertToModel(user))
+    return this.convertToDomain(model);
+  }
+
+  convertToModel(domain) {
+    return {
+      id: domain.id,
+      first_name: domain.firstName,
+      last_name: domain.lastName,
+      email: domain.email,
+      gender: domain.gender,
+      app_version: domain.appVersion,
+      profile_photo_url: domain.profilePhotoUrl,
+      meta: [{
+        address: domain.meta.address,
+        ip_address: domain.meta.ipAddress,
+        bio: domain.meta.bio
+      }],
+    }
+  }
+
   convertToDomain(model) {
     const {
       id,
